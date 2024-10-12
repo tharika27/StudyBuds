@@ -1,6 +1,7 @@
 package com.example.studybuds;
+
 import android.content.Context;
-import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -15,15 +16,15 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
-    //get variables
+    // Get variables
     ImageButton homeButton, mapButton, classesButton;
     ScrollView homePage, mapPage, classesPage;
     Context context;
-    int lightPurple, darkPurple; //colors
+    int lightPurple, darkPurple; // Colors
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //margins of the screen
+        // Margins of the screen
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
@@ -33,45 +34,55 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        //assign all android views to java variables
+        // Assign all Android views to Java variables
         homeButton = findViewById(R.id.homeButton);
         mapButton = findViewById(R.id.mapButton);
         classesButton = findViewById(R.id.classesButton);
         homePage = findViewById(R.id.homePage);
         mapPage = findViewById(R.id.mapPage);
         classesPage = findViewById(R.id.classesPage);
-        lightPurple = R.color.lightUwPurple;
-        darkPurple = R.color.uwPurple;
+
+        // Use ContextCompat to get color resources
+        lightPurple = ContextCompat.getColor(this, R.color.lightUwPurple);
+        darkPurple = ContextCompat.getColor(this, R.color.uwPurple);
         context = getApplicationContext();
 
-        //switch to home page
+        // Switch to home page
         homeButton.setOnClickListener(v -> {
             homePage.setVisibility(View.VISIBLE);
-            homeButton.setBackgroundColor(ContextCompat.getColor(context, lightPurple));
+            homeButton.setBackground(createOvalDrawable(lightPurple)); // Set oval background
             mapPage.setVisibility(View.GONE);
-            mapButton.setBackgroundColor(ContextCompat.getColor(context, darkPurple));
+            mapButton.setBackground(createOvalDrawable(darkPurple)); // Reset others
             classesPage.setVisibility(View.GONE);
-            classesButton.setBackgroundColor(ContextCompat.getColor(context, darkPurple));
+            classesButton.setBackground(createOvalDrawable(darkPurple)); // Reset others
         });
 
-        //switch to map page
+        // Switch to map page
         mapButton.setOnClickListener(v -> {
             homePage.setVisibility(View.GONE);
-            homeButton.setBackgroundColor(ContextCompat.getColor(context, darkPurple));
+            homeButton.setBackground(createOvalDrawable(darkPurple)); // Reset
             mapPage.setVisibility(View.VISIBLE);
-            mapButton.setBackgroundColor(ContextCompat.getColor(context, lightPurple));
+            mapButton.setBackground(createOvalDrawable(lightPurple)); // Set oval background
             classesPage.setVisibility(View.GONE);
-            classesButton.setBackgroundColor(ContextCompat.getColor(context, darkPurple));
+            classesButton.setBackground(createOvalDrawable(darkPurple)); // Reset others
         });
 
-        //switch to classes Page
+        // Switch to classes Page
         classesButton.setOnClickListener(v -> {
             homePage.setVisibility(View.GONE);
-            homeButton.setBackgroundColor(ContextCompat.getColor(context, darkPurple));
+            homeButton.setBackground(createOvalDrawable(darkPurple)); // Reset
             mapPage.setVisibility(View.GONE);
-            mapButton.setBackgroundColor(ContextCompat.getColor(context, darkPurple));
+            mapButton.setBackground(createOvalDrawable(darkPurple)); // Reset
             classesPage.setVisibility(View.VISIBLE);
-            classesButton.setBackgroundColor(ContextCompat.getColor(context, lightPurple));
+            classesButton.setBackground(createOvalDrawable(lightPurple)); // Set oval background
         });
+    }
+
+    // Method to create an oval shape drawable
+    private GradientDrawable createOvalDrawable(int color) {
+        GradientDrawable drawable = new GradientDrawable();
+        drawable.setShape(GradientDrawable.OVAL);
+        drawable.setColor(color);
+        return drawable;
     }
 }

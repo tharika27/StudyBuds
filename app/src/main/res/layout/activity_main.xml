@@ -1,12 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     tools:ignore="HardcodedText,UselessParent"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    >
+    tools:context=".MainActivity">
 
     <!--Navigation Container-->
     <LinearLayout
@@ -15,81 +13,82 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
-        android:background="@color/uwPurple">
+        android:background="@color/uwPurple"
+        android:padding="3dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginHorizontal="5dp">
             <ImageButton
                 android:id="@+id/homeButton"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_width="125dp"
+                android:layout_height="80dp"
                 android:contentDescription="Home Button"
                 android:src="@drawable/home_button_foreground"
-                android:background="@color/lightUwPurple"
+                android:background="@drawable/oval_light_purple"
                 android:padding="11dp"
                 android:scaleX="0.75"
-                android:scaleY="0.75"
-                />
+                android:scaleY="0.75" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Home"
                 android:gravity="center"
-                android:background="@color/uwPurple"
                 android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:layout_marginTop="-15dp"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginHorizontal="5dp">
             <ImageButton
                 android:id="@+id/mapButton"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_width="125dp"
+                android:layout_height="80dp"
                 android:contentDescription="Map Button"
                 android:src="@drawable/map_button_foreground"
-                android:background="@color/uwPurple"
+                android:background="@drawable/oval_dark_purple"
                 android:padding="11dp"
                 android:scaleX="0.75"
-                android:scaleY="0.75"
-                />
+                android:scaleY="0.75"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Map"
                 android:gravity="center"
-                android:background="@color/uwPurple"
                 android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:layout_marginTop="-15dp"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginHorizontal="5dp">
             <ImageButton
                 android:id="@+id/classesButton"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_width="125dp"
+                android:layout_height="80dp"
                 android:contentDescription="Classes Button"
                 android:src="@drawable/book_button_foreground"
-                android:background="@color/uwPurple"
+                android:background="@drawable/oval_dark_purple"
                 android:padding="11dp"
                 android:scaleX="0.75"
-                android:scaleY="0.75"
-                />
+                android:scaleY="0.75"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Classes"
                 android:gravity="center"
-                android:background="@color/uwPurple"
                 android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:layout_marginTop="-15dp"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -122,7 +121,7 @@
             android:gravity="center"
             android:textStyle="bold"
             android:textSize="35sp"
-            android:padding="5dp"
+            android:padding="11dp"
             android:background="@color/headerPurple"/>
     </ScrollView>
 
