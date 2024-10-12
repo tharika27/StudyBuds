@@ -8,6 +8,7 @@
     tools:context=".MainActivity"
     >
 
+    <!--Navigation Container-->
     <LinearLayout
         android:id="@+id/navigationContainer"
         android:layout_width="match_parent"
@@ -92,20 +93,9 @@
         </LinearLayout>
     </LinearLayout>
 
+    <!--Home Page-->
     <ScrollView
         android:id="@+id/homePage"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/offWhite"
-        android:layout_above="@id/navigationContainer">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="home"/>
-    </ScrollView>
-
-    <ScrollView
-        android:id="@+id/mapPage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/offWhite"
@@ -114,9 +104,29 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="map"/>
+            android:text="home"/>
     </ScrollView>
 
+    <!--Map Page-->
+    <ScrollView
+        android:id="@+id/mapPage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/offWhite"
+        android:layout_above="@id/navigationContainer"
+        android:visibility="visible">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Map"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="35sp"
+            android:padding="5dp"
+            android:background="@color/headerPurple"/>
+    </ScrollView>
+
+    <!--Classes Page-->
     <ScrollView
         android:id="@+id/classesPage"
         android:layout_width="match_parent"

@@ -5,4 +5,5 @@
     <color name="offWhite">#F3EDF7</color>
     <color name="uwPurple">#D0BCFF</color>
     <color name="lightUwPurple">#E8DEF8</color>
+    <color name="headerPurple">#DFD1FF</color>
 </resources>

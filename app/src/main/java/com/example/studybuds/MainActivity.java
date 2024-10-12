@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
     ImageButton homeButton, mapButton, classesButton;
     ScrollView homePage, mapPage, classesPage;
     Context context;
-
     int lightPurple, darkPurple; //colors
 
     @Override
