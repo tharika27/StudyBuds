@@ -71,16 +71,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginHorizontal="5dp">
+
             <ImageButton
                 android:id="@+id/classesButton"
                 android:layout_width="125dp"
                 android:layout_height="80dp"
-                android:contentDescription="Classes Button"
-                android:src="@drawable/book_button_foreground"
                 android:background="@drawable/oval_dark_purple"
+                android:contentDescription="Classes Button"
                 android:padding="11dp"
                 android:scaleX="0.75"
-                android:scaleY="0.75"/>
+                android:scaleY="0.75"
+                android:src="@drawable/book_button_foreground"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
