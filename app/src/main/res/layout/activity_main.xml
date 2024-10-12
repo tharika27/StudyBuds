@@ -1,19 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:ignore="HardcodedText,UselessParent"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    >
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/navigationContainer"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageButton
+                android:id="@+id/homeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:contentDescription="Home Button"
+                android:src="@drawable/home_button_foreground"
+                android:background="@color/uwPurple"
+                android:padding="11dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Home"
+                android:layout_gravity=""
+                android:background="@color/uwPurple"/>
+        </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageButton
+            android:id="@+id/mapButton"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:contentDescription="Map Button"
+            android:src="@drawable/map_button_foreground"
+            android:background="@color/uwPurple"
+            android:padding="11dp"
+            />
+        <ImageButton
+            android:id="@+id/classesButton"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:contentDescription="Classes Button"
+            android:src="@drawable/book_button_foreground"
+            android:background="@color/uwPurple"
+            android:padding="11dp"
+            />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/homePage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/offWhite"
+        android:layout_above="@id/navigationContainer">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="home"/>
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/mapPage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/offWhite"
+        android:layout_above="@id/navigationContainer"
+        android:visibility="gone">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="map"/>
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/classesPage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/offWhite"
+        android:layout_above="@id/navigationContainer"
+        android:visibility="gone">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="classes"/>
+    </ScrollView>
+
+</RelativeLayout>
