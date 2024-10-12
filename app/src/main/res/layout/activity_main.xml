@@ -26,11 +26,10 @@
                 android:layout_height="50dp"
                 android:contentDescription="Home Button"
                 android:src="@drawable/home_button_foreground"
-                android:background="@color/uwPurple"
+                android:background="@color/lightUwPurple"
                 android:padding="11dp"
                 android:scaleX="0.75"
                 android:scaleY="0.75"
-                
                 />
             <TextView
                 android:layout_width="match_parent"
