@@ -169,14 +169,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             classesPage.setVisibility(View.GONE);
         });
 
-        //display all the study sessions
-        StudyLocation studyLocation = new StudyLocation("CSE 123", "Quiz", 6, 6,
-                "Suzzalo");
-        StudyLocation studyLocation2 = new StudyLocation("CSE 351", "Midterm", 3, 5,
-                "Odegard");
-        StudyLocation studyLocation3 = new StudyLocation("CSE 331", "Quiz", 9, 10,
-                "CSE1");
-        locations = List.of(studyLocation, studyLocation2, studyLocation3);
+
+        locations = List.of();
         displayAllSessions(locations);
     }
 
