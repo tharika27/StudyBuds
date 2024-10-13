@@ -131,25 +131,7 @@
                 android:text="Map"
                 android:textSize="35sp"
                 android:textStyle="bold" />
-
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/map"
-                android:name="com.google.android.gms.maps.SupportMapFragment"
-                android:layout_width="match_parent"
-                android:layout_height="560dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@id/navigationContainer" />
-
-            <TextView
-                android:id="@+id/locationInformation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Location Information:"
-                android:gravity="center"
-                android:padding="10sp"
-                android:textSize="20sp"/>
+            
         </LinearLayout>
 
     </ScrollView>
