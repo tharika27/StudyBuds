@@ -4,7 +4,9 @@ import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.ScrollView;
 
 import androidx.activity.EdgeToEdge;
@@ -20,7 +22,9 @@ public class MainActivity extends AppCompatActivity {
     ImageButton homeButton, mapButton, classesButton;
     ScrollView homePage, mapPage, classesPage;
     Context context;
-    int lightPurple, darkPurple; // Colors
+    int lightPurple, darkPurple;
+
+    ListView classesListView1, classesListView2, classesListView3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +80,25 @@ public class MainActivity extends AppCompatActivity {
             classesPage.setVisibility(View.VISIBLE);
             classesButton.setBackground(createOvalDrawable(lightPurple)); // Set oval background
         });
+
+        classesListView1 = findViewById(R.id.classesListView1);
+        classesListView2 = findViewById(R.id.classesListView2);
+        classesListView3 = findViewById(R.id.classesListView3);
+
+        String[] classes1 = {"CSE 351"};
+        String[] classes2 = {"MATH 125"};
+        String[] classes3 = {"CLAS 430"};
+
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, classes1);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, classes2);
+        ArrayAdapter<String> adapter3 = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, classes3);
+
+        classesListView1.setAdapter(adapter1);
+        classesListView2.setAdapter(adapter2);
+        classesListView3.setAdapter(adapter3);
     }
 
     // Method to create an oval shape drawable

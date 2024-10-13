@@ -114,7 +114,7 @@
         android:layout_height="match_parent"
         android:background="@color/offWhite"
         android:layout_above="@id/navigationContainer"
-        android:visibility="visible">
+        android:visibility="gone">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -133,11 +133,41 @@
         android:layout_height="match_parent"
         android:background="@color/offWhite"
         android:layout_above="@id/navigationContainer"
-        android:visibility="gone">
-        <TextView
-            android:layout_width="wrap_content"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="classes"/>
+            android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Classes"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="35sp"
+            android:padding="11dp"
+            android:background="@color/headerPurple"/>
+
+        <!-- ListView to display classes -->
+            <ListView
+                android:id="@+id/classesListView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+            <ListView
+                android:id="@+id/classesListView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+            <ListView
+                android:id="@+id/classesListView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+            <!-- Optional: Add more views here if needed -->
+        </LinearLayout>
     </ScrollView>
 
 </RelativeLayout>
