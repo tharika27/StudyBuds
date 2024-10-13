@@ -29,10 +29,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     // Get variables
     ImageButton homeButton, mapButton, classesButton;
-    ScrollView homePage, mapPage, classesPage;
+    ScrollView homePage, mapPage, classesPage, newSessionForm;
     Context context;
     int lightPurple, darkPurple;
     LinearLayout layout;
+    Button goToNewSessionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         classesPage = findViewById(R.id.classesPage);
         layout = findViewById(R.id.classesContainer);
         layout.setGravity(Gravity.START);
+        goToNewSessionButton = findViewById(R.id.newSessionButton);
+        newSessionForm = findViewById(R.id.addSessionPage);
 
 
         // Use ContextCompat to get color resources
@@ -92,6 +95,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             mapButton.setBackground(createOvalDrawable(darkPurple)); // Reset
             classesPage.setVisibility(View.VISIBLE);
             classesButton.setBackground(createOvalDrawable(lightPurple)); // Set oval background
+        });
+
+        //switch to new session form
+        goToNewSessionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newSessionForm.setVisibility(View.VISIBLE);
+                classesPage.setVisibility(View.GONE);
+            }
         });
     }
 

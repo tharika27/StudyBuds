@@ -150,9 +150,8 @@
                 android:layout_marginStart="40dp"
                 android:layout_marginEnd="40dp"
                 android:gravity="center"/>
-
-    </LinearLayout>
-</ScrollView>
+        </LinearLayout>
+    </ScrollView>
 
     <!--Map Page-->
     <ScrollView
@@ -198,45 +197,136 @@
         android:layout_height="match_parent"
         android:background="@color/offWhite"
         android:layout_above="@id/navigationContainer"
-        android:visibility="visible">
+        android:visibility="gone">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/offWhite"
+            android:id="@+id/classesContainer">
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:background="@color/headerPurple">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/headerPurple"
+                    android:gravity="center"
+                    android:padding="11dp"
+                    android:text="Classes"
+                    android:textSize="35sp"
+                    android:textStyle="bold"
+                    android:paddingEnd="60sp"
+                    android:paddingStart="100sp"/>
 
-    <LinearLayout
+                <Button
+                    android:id="@+id/newSessionButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add Session"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="10dp"
+                    android:backgroundTint="@color/black" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!--Add a Session Information-->
+    <ScrollView
+        tools:ignore="Autofill"
+        android:id="@+id/addSessionPage"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_height="match_parent"
         android:background="@color/offWhite"
-        android:id="@+id/classesContainer">
+        android:layout_above="@id/navigationContainer"
+        android:visibility="gone"
+        android:layout_gravity="center_horizontal"
+        >
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:background="@color/headerPurple">
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/headerPurple"
                 android:gravity="center"
                 android:padding="11dp"
-                android:text="Classes"
+                android:text="Create a Study Group"
                 android:textSize="35sp"
-                android:textStyle="bold"
-                android:paddingEnd="60sp"
-                android:paddingStart="100sp"/>
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_marginTop="50dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:padding="11dp"
+                android:text="Enter Information:"
+                android:textSize="25sp"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/classNameEntry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Class Name"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginTop="40dp"
+                android:inputType="text"
+                android:gravity="center"/>
+
+            <Spinner
+                android:id="@+id/locationSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginTop="30dp"
+                android:padding="10dp"
+                android:entries="@array/locations"
+                />
+
+            <EditText
+                android:id="@+id/numberOfPeople"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Amount of People"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginTop="30dp"
+                android:inputType="number"
+                android:gravity="center"/>
+
+            <EditText
+                android:id="@+id/typeOfStudy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="What are you studying for?"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginTop="30dp"
+                android:inputType="text"
+                android:gravity="center"/>
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Add Session"
-                android:layout_gravity="center"
-                android:layout_marginEnd="10dp"
-                android:backgroundTint="@color/black" />
+                android:id="@+id/inputInformationButton"
+                android:layout_marginTop="40dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:text="Submit Information"
+                android:backgroundTint="@color/uwPurple"
+                android:padding="10dp"/>
         </LinearLayout>
-
-
-    </LinearLayout>
     </ScrollView>
 
 </RelativeLayout>
