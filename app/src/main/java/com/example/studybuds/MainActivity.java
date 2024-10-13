@@ -132,6 +132,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             mapButton.setBackground(createOvalDrawable(darkPurple)); // Reset others
             classesPage.setVisibility(View.GONE);
             classesButton.setBackground(createOvalDrawable(darkPurple)); // Reset others
+            newSessionForm.setVisibility(View.GONE);
+            goToNewSessionButton.setBackground(createOvalDrawable(lightPurple));
         });
 
         // Switch to map page
@@ -142,6 +144,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             mapButton.setBackground(createOvalDrawable(lightPurple)); // Set oval background
             classesPage.setVisibility(View.GONE);
             classesButton.setBackground(createOvalDrawable(darkPurple)); // Reset others
+            newSessionForm.setVisibility(View.GONE);
+            goToNewSessionButton.setBackground(createOvalDrawable(lightPurple));
         });
 
         // Switch to classes Page
@@ -152,6 +156,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             mapButton.setBackground(createOvalDrawable(darkPurple)); // Reset
             classesPage.setVisibility(View.VISIBLE);
             classesButton.setBackground(createOvalDrawable(lightPurple)); // Set oval background
+            newSessionForm.setVisibility(View.GONE);
+            goToNewSessionButton.setBackground(createOvalDrawable(lightPurple));
         });
 
         //switch to new session form
