@@ -28,10 +28,11 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.material.button.MaterialButton;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -81,42 +82,39 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         numPeople = findViewById(R.id.numberOfPeople);
         typeOfStudy = findViewById(R.id.typeOfStudy);
         submitBtn = findViewById(R.id.inputInformationButton);
-        submitBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v) {
+        submitBtn.setOnClickListener(v -> {
 
 
-                String ClassName = className.getText().toString();
-                String Location = location.getSelectedItem().toString();
-                String NumPeople = numPeople.getText().toString();
-                String TypeofStudy = typeOfStudy.getText().toString();
+            String ClassName = className.getText().toString();
+            String Location = location.getSelectedItem().toString();
+            String NumPeople = numPeople.getText().toString();
+            String TypeofStudy = typeOfStudy.getText().toString();
 
-                if (ClassName.isEmpty() || Location.isEmpty() || NumPeople.isEmpty() || TypeofStudy.isEmpty()) {
-                    Toast.makeText(MainActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
-                    return;
+            if (ClassName.isEmpty() || Location.isEmpty() || NumPeople.isEmpty() || TypeofStudy.isEmpty()) {
+                Toast.makeText(MainActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+                return;
 
-                }
-
-                Map<String, Object> classData = new HashMap<>();
-                classData.put("className", ClassName);
-                classData.put("location", Location);
-                classData.put("numPeople", NumPeople);
-                classData.put("typeOfStudy", TypeofStudy);
-
-
-                db.collection("classes")
-                        .add((classData))
-                        .addOnSuccessListener(documentReference -> {
-                            Toast.makeText(MainActivity.this, "Class added successfully", Toast.LENGTH_SHORT).show();
-                            Log.d("Firestore", "Session Added " + documentReference.getId());
-                        })
-                        .addOnFailureListener(e -> {
-                            Toast.makeText(MainActivity.this, "Error adding class", Toast.LENGTH_SHORT).show();
-                            Log.w("Firestore", "Error adding document", e);
-                        });
             }
 
+            Map<String, Object> classData = new HashMap<>();
+            classData.put("className", ClassName);
+            classData.put("location", Location);
+            classData.put("numPeople", NumPeople);
+            classData.put("typeOfStudy", TypeofStudy);
 
+
+            db.collection("classes")
+                .add((classData))
+                .addOnSuccessListener(documentReference -> {
+                    Toast.makeText(MainActivity.this, "Class added successfully", Toast.LENGTH_SHORT).show();
+                    Log.d("Firestore", "Session Added " + documentReference.getId());
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(MainActivity.this, "Error adding class", Toast.LENGTH_SHORT).show();
+                    Log.w("Firestore", "Error adding document", e);
+                });
+            newSessionForm.setVisibility(View.GONE);
+            classesPage.setVisibility(View.VISIBLE);
         });
 
         // Use ContextCompat to get color resources
@@ -157,13 +155,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
 
         //switch to new session form
-        goToNewSessionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                newSessionForm.setVisibility(View.VISIBLE);
-                classesPage.setVisibility(View.GONE);
-            }
+        goToNewSessionButton.setOnClickListener(v -> {
+            newSessionForm.setVisibility(View.VISIBLE);
+            classesPage.setVisibility(View.GONE);
         });
+
+        //display all the study sessions
+        StudyLocation studyLocation = new StudyLocation("CSE 123", "Quiz", 6, 6,
+                "Suzzalo", new LatLng(-200, 500));
+        List<StudyLocation> locations = List.of(studyLocation, studyLocation, studyLocation, studyLocation, studyLocation);
+        displayAllSessions(locations);
     }
 
     // Method to create an oval shape drawable
@@ -181,6 +182,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         googleMap.addMarker(new MarkerOptions()
                 .position(uw)
                 .title("University Of Washington"));
+    }
+
+    private void displayAllSessions(List<StudyLocation> locations) {
+        for (StudyLocation location: locations) {
+            layout.addView(createLayout(location));
+        }
     }
 
     //populate final page
@@ -208,6 +215,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (location.amountOfPeople == location.limitOfPeople) {
+                    Toast.makeText(getApplicationContext(), "Session Full", Toast.LENGTH_SHORT).show();
+                } else {
+                    location.amountOfPeople++;
+                }
                 button.setBackgroundColor(darkPurple);
             }
         });
