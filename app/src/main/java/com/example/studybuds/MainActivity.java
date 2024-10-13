@@ -4,13 +4,17 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -24,11 +28,21 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.button.MaterialButton;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     // Get variables
     ImageButton homeButton, mapButton, classesButton;
+    FirebaseFirestore db;
+    EditText className, numPeople, typeOfStudy,sessionDesc;
+    Spinner location;
+
+    Button submitBtn;
     ScrollView homePage, mapPage, classesPage, newSessionForm;
     Context context;
     int lightPurple, darkPurple;
@@ -47,6 +61,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             return insets;
         });
 
+        db = FirebaseFirestore.getInstance();
+
         // Assign all Android views to Java variables
         homeButton = findViewById(R.id.homeButton);
         mapButton = findViewById(R.id.mapButton);
@@ -59,6 +75,49 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         goToNewSessionButton = findViewById(R.id.newSessionButton);
         newSessionForm = findViewById(R.id.addSessionPage);
 
+        //create study session data
+        className = findViewById(R.id.classNameEntry);
+        location = findViewById(R.id.locationSpinner);
+        numPeople = findViewById(R.id.numberOfPeople);
+        typeOfStudy = findViewById(R.id.typeOfStudy);
+        submitBtn = findViewById(R.id.inputInformationButton);
+        submitBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View v) {
+
+
+                String ClassName = className.getText().toString();
+                String Location = location.getSelectedItem().toString();
+                String NumPeople = numPeople.getText().toString();
+                String TypeofStudy = typeOfStudy.getText().toString();
+
+                if (ClassName.isEmpty() || Location.isEmpty() || NumPeople.isEmpty() || TypeofStudy.isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+                    return;
+
+                }
+
+                Map<String, Object> classData = new HashMap<>();
+                classData.put("className", ClassName);
+                classData.put("location", Location);
+                classData.put("numPeople", NumPeople);
+                classData.put("typeOfStudy", TypeofStudy);
+
+
+                db.collection("classes")
+                        .add((classData))
+                        .addOnSuccessListener(documentReference -> {
+                            Toast.makeText(MainActivity.this, "Class added successfully", Toast.LENGTH_SHORT).show();
+                            Log.d("Firestore", "Session Added " + documentReference.getId());
+                        })
+                        .addOnFailureListener(e -> {
+                            Toast.makeText(MainActivity.this, "Error adding class", Toast.LENGTH_SHORT).show();
+                            Log.w("Firestore", "Error adding document", e);
+                        });
+            }
+
+
+        });
 
         // Use ContextCompat to get color resources
         lightPurple = ContextCompat.getColor(this, R.color.lightUwPurple);
