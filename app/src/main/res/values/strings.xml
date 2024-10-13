@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Studybuds</string>
+    <string name="home_page_desc">Your go-to platform for finding study spots
+        and connecting with study groups near you.
+        Whether you are looking for a quiet place
+        to focus or a group to collaborate with,
+        StudyBuds makes it easy to find the perfect
+        environment to succeed.</string>
 </resources>

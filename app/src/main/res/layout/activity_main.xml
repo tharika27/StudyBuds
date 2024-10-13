@@ -101,12 +101,41 @@
         android:layout_height="match_parent"
         android:background="@color/offWhite"
         android:layout_above="@id/navigationContainer"
-        android:visibility="gone">
+        android:visibility="visible"
+        android:layout_gravity="center_horizontal"
+        android:padding="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:layout_gravity="center"
+            android:paddingBottom="24dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="home"/>
-    </ScrollView>
+            android:text="Welcome to StudyBuds!"
+            android:textSize="20sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="80dp"
+            android:background="@drawable/rounded_rectangle_light_purple"
+            />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="200dp"
+                android:lineSpacingExtra="8dp"
+                android:text="@string/home_page_desc"
+                android:background="@drawable/rounded_rectangle_light_purple" />
+
+    </LinearLayout>
+</ScrollView>
 
     <!--Map Page-->
     <ScrollView
@@ -116,7 +145,7 @@
         android:layout_above="@id/navigationContainer"
         android:layout_marginBottom="0dp"
         android:background="@color/offWhite"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
