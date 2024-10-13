@@ -86,7 +86,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Classes"
+                android:text="Study Groups"
                 android:gravity="center"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -219,17 +219,18 @@
                     android:background="@color/uwPurple"
                     android:gravity="center"
                     android:padding="11dp"
-                    android:text="Classes"
-                    android:textSize="35sp"
+                    android:text="Study Groups"
+                    android:textSize="30sp"
                     android:textStyle="bold"
                     android:paddingEnd="60sp"
-                    android:paddingStart="100sp"/>
+                    android:paddingStart="100sp"
+                    android:layout_marginRight="-25dp"/>
 
                 <Button
                     android:id="@+id/newSessionButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Add Session"
+                    android:text="Add"
                     android:layout_gravity="center"
                     android:layout_marginEnd="10dp"
                     android:backgroundTint="@color/logoBackgroundColor"
