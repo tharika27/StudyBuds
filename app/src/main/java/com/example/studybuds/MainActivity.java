@@ -1,5 +1,8 @@
 package com.example.studybuds;
 
+import static android.content.ContentValues.TAG;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
@@ -29,7 +32,13 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     // Get variables
     ImageButton homeButton, mapButton, classesButton;
+    List<ClassData> classDataList = new ArrayList<>();
+
     FirebaseFirestore db;
     EditText className, numPeople, typeOfStudy,sessionDesc;
     Spinner location;
@@ -118,7 +129,45 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 });
             newSessionForm.setVisibility(View.GONE);
             classesPage.setVisibility(View.VISIBLE);
+
         });
+
+        @SuppressLint("CutPasteId") View classesContainer = findViewById(R.id.classesContainer);
+
+
+        // Retrieve all documents from the "classes" collection
+        db.collection("classes")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @SuppressLint("DefaultLocale")
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            // Get the list of documents
+                            List<DocumentSnapshot> documents = task.getResult().getDocuments();
+                            for (DocumentSnapshot document : documents) {
+                                // Retrieve the data
+                                String documentId = document.getId();  // Get the document ID
+                                String className = document.getString("className");  // Replace with your field names
+                                String location = document.getString("location");
+                                Long numberOfPeople = document.getLong("numberOfPeople");
+                                String studyType = document.getString("typeOfStudy");
+
+                                // Create a new TextView for each document
+                                TextView classView = new TextView(MainActivity.this);
+                                classView.setText(String.format("Class Name: %s\nLocation: %s\nNumber of People: %d\nType of Study: %s",
+                                        className, location, numberOfPeople != null ? numberOfPeople : 0, studyType));
+                                classView.setPadding(16, 16, 16, 16);
+                                classView.setBackgroundResource(R.color.offWhite); // Set background color if needed
+
+                                // Add the TextView to the LinearLayout
+                                layout.addView(classView);
+                            }
+                        } else {
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+                    }
+                });
 
         // Use ContextCompat to get color resources
         lightPurple = ContextCompat.getColor(this, R.color.lightUwPurple);
