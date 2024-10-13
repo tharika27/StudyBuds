@@ -29,6 +29,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.internal.IGoogleMapDelegate;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -49,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     // Get variables
     ImageButton homeButton, mapButton, classesButton;
-    List<ClassData> classDataList = new ArrayList<>();
 
     FirebaseFirestore db;
     EditText className, numPeople, typeOfStudy,sessionDesc;
@@ -96,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         numPeople = findViewById(R.id.numberOfPeople);
         typeOfStudy = findViewById(R.id.typeOfStudy);
         submitBtn = findViewById(R.id.inputInformationButton);
+
         submitBtn.setOnClickListener(v -> {
 
 
@@ -115,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             classData.put("location", Location);
             classData.put("numPeople", NumPeople);
             classData.put("typeOfStudy", TypeofStudy);
+            classData.put("currPeople","0");
 
 
             db.collection("classes")
@@ -129,6 +131,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 });
             newSessionForm.setVisibility(View.GONE);
             classesPage.setVisibility(View.VISIBLE);
+
+            //reload
+            finish();
+            overridePendingTransition(0, 0);
+            startActivity(getIntent());
+            overridePendingTransition(0, 0);
 
         });
 
@@ -150,11 +158,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 String documentId = document.getId();  // Get the document ID
                                 String className = document.getString("className");  // Replace with your field names
                                 String location = document.getString("location");
-                                Long numberOfPeopleLong = document.getLong("numberOfPeople");
+                                int numberOfPeople = Integer.parseInt(document.getString("numPeople"));
                                 String studyType = document.getString("typeOfStudy");
-                                int numberOfPeopleInt = (numberOfPeopleLong != null) ? numberOfPeopleLong.intValue():0;
-                                StudyLocation temp = new StudyLocation(className, studyType, 0,
-                                        numberOfPeopleInt,location);
+                                int currPeople = Integer.parseInt(document.getString("currPeople"));
+                                StudyLocation temp = new StudyLocation(className, studyType, currPeople,
+                                        numberOfPeople,location,documentId);
                                 locations.add(temp);
                             }
                             displayAllSessions(locations);
@@ -194,7 +202,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             newSessionForm.setVisibility(View.GONE);
             goToNewSessionButton.setBackground(createOvalDrawable(lightPurple));
         });
-
         // Switch to classes Page
         classesButton.setOnClickListener(v -> {
             homePage.setVisibility(View.GONE);
@@ -264,9 +271,21 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 if (location.amountOfPeople == location.limitOfPeople) {
                     Toast.makeText(getApplicationContext(), "Session Full", Toast.LENGTH_SHORT).show();
                 } else {
-                    location.amountOfPeople++;
+                    int newCurr = location.amountOfPeople + 1;
+                    db.collection("classes").document(location.documentID).delete();
+                    Map<String, Object> data = new HashMap<>();
+                    data.put("className", location.className);
+                    data.put("location", location.locationName);
+                    data.put("numPeople", String.valueOf(location.limitOfPeople));
+                    data.put("typeOfStudy", location.studyType);
+                    data.put("currPeople", String.valueOf(newCurr));
+                    db.collection("classes").add(data);
+                    //reload
+                    finish();
+                    overridePendingTransition(0, 0);
+                    startActivity(getIntent());
+                    overridePendingTransition(0, 0);
                 }
-                button.setBackgroundColor(darkPurple);
             }
         });
 
@@ -296,5 +315,4 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         return result;
     }
-
 }
