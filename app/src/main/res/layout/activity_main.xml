@@ -39,7 +39,7 @@
                 android:gravity="center"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:layout_marginTop="-15dp"/>
+                android:layout_marginTop="-10dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -64,7 +64,7 @@
                 android:gravity="center"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:layout_marginTop="-15dp"/>
+                android:layout_marginTop="-10dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -89,7 +89,7 @@
                 android:gravity="center"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:layout_marginTop="-15dp"/>
+                android:layout_marginTop="-10dp"/>
         </LinearLayout>
     </LinearLayout>
 
