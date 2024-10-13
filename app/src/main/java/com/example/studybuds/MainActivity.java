@@ -156,16 +156,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 StudyLocation temp = new StudyLocation(className, studyType, 0,
                                         numberOfPeopleInt,location);
                                 locations.add(temp);
-                                // Create a new TextView for each document
-                                TextView classView = new TextView(MainActivity.this);
-                                classView.setText(String.format("Class Name: %s\nLocation: %s\nNumber of People: %d\nType of Study: %s",
-                                        className, location, numberOfPeopleLong != null ? numberOfPeopleLong : 0, studyType));
-                                classView.setPadding(16, 16, 16, 16);
-                                classView.setBackgroundResource(R.color.offWhite); // Set background color if needed
-
-                                // Add the TextView to the LinearLayout
-                                layout.addView(classView);
                             }
+                            displayAllSessions(locations);
                         } else {
                             Log.w(TAG, "Error getting documents.", task.getException());
                         }
@@ -220,8 +212,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             newSessionForm.setVisibility(View.VISIBLE);
             classesPage.setVisibility(View.GONE);
         });
-
-        displayAllSessions(locations);
     }
 
     // Method to create an oval shape drawable
