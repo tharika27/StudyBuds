@@ -166,6 +166,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 locations.add(temp);
                             }
                             displayAllSessions(locations);
+                            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+                            mapFragment.getMapAsync(googleMap -> {
+                                for(StudyLocation location: locations) {
+                                    LatLng current = location.locationCoordinates;
+                                    googleMap.addMarker(new MarkerOptions().position(current).title(location.locationName));
+                                }
+                            });
                         } else {
                             Log.w(TAG, "Error getting documents.", task.getException());
                         }
@@ -176,8 +183,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         lightPurple = ContextCompat.getColor(this, R.color.lightUwPurple);
         darkPurple = ContextCompat.getColor(this, R.color.uwPurple);
         context = getApplicationContext();
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+
 
         // Switch to home page
         homeButton.setOnClickListener(v -> {
