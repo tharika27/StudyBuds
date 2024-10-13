@@ -1,9 +1,5 @@
 package com.example.studybuds;
 
-import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-
 import com.google.android.gms.maps.model.LatLng;
 
 public class StudyLocation {
