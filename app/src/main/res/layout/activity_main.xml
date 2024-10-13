@@ -227,8 +227,8 @@
 
                 <Button
                     android:id="@+id/newSessionButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="74dp"
+                    android:layout_height="40dp"
                     android:text="Add"
                     android:layout_gravity="center"
                     android:layout_marginEnd="10dp"
