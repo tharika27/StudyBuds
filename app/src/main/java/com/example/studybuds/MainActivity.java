@@ -27,6 +27,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -49,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     int lightPurple, darkPurple;
     LinearLayout layout;
     Button goToNewSessionButton;
+    List<StudyLocation> locations;
+    TextView markerInformation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,8 +171,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         //display all the study sessions
         StudyLocation studyLocation = new StudyLocation("CSE 123", "Quiz", 6, 6,
-                "Suzzalo", new LatLng(-200, 500));
-        List<StudyLocation> locations = List.of(studyLocation, studyLocation, studyLocation, studyLocation, studyLocation);
+                "Suzzalo");
+        StudyLocation studyLocation2 = new StudyLocation("CSE 351", "Midterm", 3, 5,
+                "Odegard");
+        StudyLocation studyLocation3 = new StudyLocation("CSE 331", "Quiz", 9, 10,
+                "CSE1");
+        locations = List.of(studyLocation, studyLocation2, studyLocation3);
         displayAllSessions(locations);
     }
 
@@ -183,11 +190,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
-        //TODO: add pointers to the map
-        LatLng uw = new LatLng(47.6567, -122.3066);
-        googleMap.addMarker(new MarkerOptions()
-                .position(uw)
-                .title("University Of Washington"));
+        for(StudyLocation location: locations) {
+            LatLng current = location.locationCoordinates;
+            googleMap.addMarker(new MarkerOptions().position(current).title(location.locationName));
+        }
     }
 
     private void displayAllSessions(List<StudyLocation> locations) {
