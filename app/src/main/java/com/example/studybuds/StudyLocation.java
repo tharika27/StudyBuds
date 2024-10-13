@@ -9,14 +9,16 @@ public class StudyLocation {
     int limitOfPeople;
     String locationName;
     LatLng locationCoordinates;
+    String documentID;
 
     public StudyLocation(String className, String studyType,
-                         int amountOfPeople, int limitOfPeople, String locationName) {
+                         int amountOfPeople, int limitOfPeople, String locationName, String documentID) {
         this.className = className;
         this.studyType = studyType;
         this.amountOfPeople = amountOfPeople;
         this.limitOfPeople = limitOfPeople;
         this.locationName = locationName;
+        this.documentID = documentID;
 
         switch (this.locationName) {
             case "Suzzalo":

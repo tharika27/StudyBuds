@@ -30,14 +30,11 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -49,8 +46,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     // Get variables
     ImageButton homeButton, mapButton, classesButton;
-    List<ClassData> classDataList = new ArrayList<>();
-
     FirebaseFirestore db;
     EditText className, numPeople, typeOfStudy,sessionDesc;
     Spinner location;
@@ -62,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     LinearLayout layout;
     Button goToNewSessionButton;
     List<StudyLocation> locations;
+    int currPeople;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             classData.put("className", ClassName);
             classData.put("location", Location);
             classData.put("numPeople", NumPeople);
+            classData.put("currPeople", 0);
             classData.put("typeOfStudy", TypeofStudy);
 
 
@@ -150,11 +147,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 String documentId = document.getId();  // Get the document ID
                                 String className = document.getString("className");  // Replace with your field names
                                 String location = document.getString("location");
-                                Long numberOfPeopleLong = document.getLong("numberOfPeople");
+                                String numberOfPeopleLong = document.getString("numPeople");
                                 String studyType = document.getString("typeOfStudy");
-                                int numberOfPeopleInt = (numberOfPeopleLong != null) ? numberOfPeopleLong.intValue():0;
                                 StudyLocation temp = new StudyLocation(className, studyType, 0,
-                                        numberOfPeopleInt,location);
+                                        Integer.parseInt(numberOfPeopleLong),location, documentId);
                                 locations.add(temp);
                             }
                             displayAllSessions(locations);
@@ -264,9 +260,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 if (location.amountOfPeople == location.limitOfPeople) {
                     Toast.makeText(getApplicationContext(), "Session Full", Toast.LENGTH_SHORT).show();
                 } else {
-                    location.amountOfPeople++;
+                    String documentID = location.documentID;
+                    db.collection("classes").document(documentID)
+                            .update("currPeople", location.amountOfPeople++).addOnSuccessListener(aVoid -> {
+                                Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+                            });
                 }
-                button.setBackgroundColor(darkPurple);
             }
         });
 
