@@ -6,15 +6,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ScrollView;
-
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class MainActivity extends AppCompatActivity {
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     // Get variables
     ImageButton homeButton, mapButton, classesButton;
@@ -46,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
         lightPurple = ContextCompat.getColor(this, R.color.lightUwPurple);
         darkPurple = ContextCompat.getColor(this, R.color.uwPurple);
         context = getApplicationContext();
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
         // Switch to home page
         homeButton.setOnClickListener(v -> {
@@ -84,5 +92,13 @@ public class MainActivity extends AppCompatActivity {
         drawable.setShape(GradientDrawable.OVAL);
         drawable.setColor(color);
         return drawable;
+    }
+
+    @Override
+    public void onMapReady(@NonNull GoogleMap googleMap) {
+        LatLng uw = new LatLng(47.6567, -122.3066);
+        googleMap.addMarker(new MarkerOptions()
+                .position(uw)
+                .title("University Of Washington"));
     }
 }
