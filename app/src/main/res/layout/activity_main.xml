@@ -113,7 +113,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/headerPurple"
+                android:background="@color/uwPurple"
                 android:gravity="center"
                 android:padding="11dp"
                 android:text="StudyBuds"
@@ -126,7 +126,7 @@
                 android:text="Welcome to StudyBuds!"
                 android:textSize="30sp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="30dp"
                 android:background="@drawable/rounded_rectangle_light_purple" />
 
             <ImageView
@@ -137,19 +137,21 @@
                 android:scaleX="0.8"
                 android:scaleY="0.8"
                 android:layout_gravity="center"
-                android:background="@drawable/logo_background"/>
+                android:background="@drawable/logo_background"
+                />
 
             <TextView
-                android:textSize="20sp"
-                android:layout_width="wrap_content"
+                android:layout_width="360dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="-10dp"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/rounded_rectangle_light_purple"
+                android:gravity="center"
                 android:lineSpacingExtra="8dp"
                 android:text="@string/home_page_desc"
-                android:background="@drawable/rounded_rectangle_light_purple"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="40dp"
-                android:gravity="center"/>
+                android:textSize="20sp" />
         </LinearLayout>
     </ScrollView>
 
@@ -170,7 +172,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/headerPurple"
+                android:background="@color/uwPurple"
                 android:gravity="center"
                 android:padding="11dp"
                 android:text="Map"
@@ -210,11 +212,11 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_gravity="center"
-                android:background="@color/headerPurple">
+                android:background="@color/uwPurple">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/headerPurple"
+                    android:background="@color/uwPurple"
                     android:gravity="center"
                     android:padding="11dp"
                     android:text="Classes"
@@ -230,7 +232,8 @@
                     android:text="Add Session"
                     android:layout_gravity="center"
                     android:layout_marginEnd="10dp"
-                    android:backgroundTint="@color/black" />
+                    android:backgroundTint="@color/logoBackgroundColor"
+                    />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
@@ -255,7 +258,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/headerPurple"
+                android:background="@color/uwPurple"
                 android:gravity="center"
                 android:padding="11dp"
                 android:text="Create a Study Group"
