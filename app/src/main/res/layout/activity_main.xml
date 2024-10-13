@@ -204,7 +204,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@color/offWhite">
+        android:background="@color/offWhite"
+        android:id="@+id/classesContainer">
 
         <TextView
             android:layout_width="match_parent"
@@ -216,20 +217,6 @@
             android:textSize="35sp"
             android:textStyle="bold" />
 
-        <ListView
-            android:id="@+id/classesListView1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <ListView
-            android:id="@+id/classesListView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <ListView
-            android:id="@+id/classesListView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
     </LinearLayout>
     </ScrollView>
 
