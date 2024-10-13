@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     LinearLayout layout;
     Button goToNewSessionButton;
     List<StudyLocation> locations;
-    TextView markerInformation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         layout.setGravity(Gravity.START);
         goToNewSessionButton = findViewById(R.id.newSessionButton);
         newSessionForm = findViewById(R.id.addSessionPage);
+        locations = new ArrayList<>();
 
         //create study session data
         className = findViewById(R.id.classNameEntry);
@@ -150,13 +150,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 String documentId = document.getId();  // Get the document ID
                                 String className = document.getString("className");  // Replace with your field names
                                 String location = document.getString("location");
-                                Long numberOfPeople = document.getLong("numberOfPeople");
+                                Long numberOfPeopleLong = document.getLong("numberOfPeople");
                                 String studyType = document.getString("typeOfStudy");
-
+                                int numberOfPeopleInt = (numberOfPeopleLong != null) ? numberOfPeopleLong.intValue():0;
+                                StudyLocation temp = new StudyLocation(className, studyType, 0,
+                                        numberOfPeopleInt,location);
+                                locations.add(temp);
                                 // Create a new TextView for each document
                                 TextView classView = new TextView(MainActivity.this);
                                 classView.setText(String.format("Class Name: %s\nLocation: %s\nNumber of People: %d\nType of Study: %s",
-                                        className, location, numberOfPeople != null ? numberOfPeople : 0, studyType));
+                                        className, location, numberOfPeopleLong != null ? numberOfPeopleLong : 0, studyType));
                                 classView.setPadding(16, 16, 16, 16);
                                 classView.setBackgroundResource(R.color.offWhite); // Set background color if needed
 
@@ -218,8 +221,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             classesPage.setVisibility(View.GONE);
         });
 
-
-        locations = List.of();
         displayAllSessions(locations);
     }
 
